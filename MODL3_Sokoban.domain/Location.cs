@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.domain
 {
-	class Location
+	public class Location
 	{
 		private int x;
 		private int y;

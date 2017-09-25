@@ -18,18 +18,18 @@ namespace MODL3_Sokoban.domain
         public void move(Direction input)
         {
             switch (input)
-            {
-                case Direction.up:
-                    this.loc.yPosition++;
-                    break;
-                case Direction.right:
-                    this.loc.xPosition++;
-                    break;
-                case Direction.left:
-                    this.loc.xPosition--;
+			{
+				case Direction.left:
+					this.loc.xPosition--;
+					break;
+				case Direction.right:
+					this.loc.xPosition++;
+					break;
+				case Direction.up:
+                    this.loc.yPosition--;
                     break;
                 case Direction.down:
-                    this.loc.yPosition--;
+                    this.loc.yPosition++;
                     break;
             }
 

@@ -40,23 +40,23 @@ namespace MODL3_Sokoban.domain
             }
         }
 
-        public void drawMaze(int mazeNumber)
-        {
-            lines = System.IO.File.ReadAllLines(@"doolhof" + mazeNumber + ".txt");
-            Console.Clear();
-            foreach (string line in lines)
-            {
-                foreach (char c in line)
-                {
-                    Console.Write(c);
-                }
-                Console.WriteLine("\b");
-            }
-            Console.WriteLine(height + " " + width);
-            Console.ReadLine();
-        }
+		public void drawMazeArray()
+		{
+			Console.Clear();
+			int index = 0; ;
+			for (int i = 0; i < height; i++)
+			{
+				for (int j = 0; j < width; j++)
+				{
+					Console.Write(filterSymbol(locList[index].role));
+					index++;
+				}
+				Console.WriteLine("\b");
+			}
+			index = 0;
+		}
 
-        public Symbol filterChar(char c)
+		public Symbol filterChar(char c)
         {
             if (c == '#')
             {
@@ -93,7 +93,43 @@ namespace MODL3_Sokoban.domain
             }
         }
 
-        public void determineArraySize(int mazeNumber)
+		public char filterSymbol(Symbol s)
+		{
+			if (s == Symbol.hashtag)
+			{
+				return '█';
+			}
+			else if (s == Symbol.dot)
+			{
+				return '.';
+			}
+			else if (s == Symbol.o)
+			{
+				return 'o';
+			}
+			else if (s == Symbol.zero)
+			{
+				return '0';
+			}
+			else if (s == Symbol.x)
+			{
+				return 'x';
+			}
+			else if (s == Symbol.at)
+			{
+				return '@';
+			}
+			else if (s == Symbol.whitespace)
+			{
+				return ' ';
+			}
+			else
+			{
+				return ' ';
+			}
+		}
+
+		public void determineArraySize(int mazeNumber)
         {
             string[] templines = System.IO.File.ReadAllLines(@"doolhof" + mazeNumber + ".txt");
             foreach (string line in templines)

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.domain
 {
-    public class Presentation
+    class Presentation
     {
-        Maze maze;
+        public Maze maze { get; set; }
         public void showInfo()
         {
             Console.WriteLine("┌────────────────────────────────────────────────────┐");
@@ -44,7 +44,7 @@ namespace MODL3_Sokoban.domain
                     num = Convert.ToInt32(value);
                     maze = new Maze(num);
                     maze.loadMaze(num);
-
+					maze.drawMazeArray();
                 }
                 else if (c != 's')
                 {
