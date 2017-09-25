@@ -11,13 +11,13 @@ namespace MODL3_Sokoban.domain
 		private int x;
 		private int y;
 
-		public Symbol role { get; set; }
+		public Symbol symbol { get; set; }
 		public int xPosition { get; set; }
 		public int yPosition { get; set; }
 
 		public Location(int x, int y, Symbol role)
 		{
-            this.role = role;
+            this.symbol = role;
 			xPosition = x;
 			yPosition = y;
 		}

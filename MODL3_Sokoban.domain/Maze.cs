@@ -48,7 +48,7 @@ namespace MODL3_Sokoban.domain
 			{
 				for (int j = 0; j < width; j++)
 				{
-					Console.Write(filterSymbol(locList[index].role));
+					Console.Write(filterSymbol(locList[index].symbol));
 					index++;
 				}
 				Console.WriteLine("\b");
@@ -76,7 +76,7 @@ namespace MODL3_Sokoban.domain
             }
             else if (c == 'x')
             {
-                return Symbol.zero;
+                return Symbol.x;
             }
             else if (c == '@')
             {
@@ -142,49 +142,5 @@ namespace MODL3_Sokoban.domain
             }
             width = arraySize / height;
         }
-
-		public Location getNextLoc(Direction d, Location l)
-		{
-			int x = l.xPosition;
-			int y = l.yPosition;
-
-			switch (d)
-			{
-				case Direction.left:
-					if (l.xPosition > 0)
-					{
-						x = x - 1;
-					}
-					return null;
-				case Direction.right:
-					if (l.xPosition < width)
-					{
-						x = x + 1;
-					}
-					return null;
-				case Direction.up:
-					if (l.yPosition > 0)
-					{
-						y = y - 1;
-					}
-					return null;
-				case Direction.down:
-					if (l.yPosition < height)
-					{
-						y = y + 1;
-					}
-					return null;
-			}
-
-			foreach (Location element in locList)
-			{
-				if (element.xPosition == x && element.yPosition == y)
-				{
-					return element;
-				}
-			}
-
-			return null;
-		}
 	}
 }

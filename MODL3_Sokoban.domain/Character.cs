@@ -8,6 +8,7 @@ namespace MODL3_Sokoban.domain
 {
 	class Character
 	{
+		Symbol temp = Symbol.dot;
         public Location loc { get; set; }
 
         public Character(Location loc)
@@ -15,25 +16,12 @@ namespace MODL3_Sokoban.domain
             this.loc = loc;
         }
 
-        public void move(Direction input)
-        {
-            switch (input)
-			{
-				case Direction.left:
-					this.loc.xPosition--;
-					break;
-				case Direction.right:
-					this.loc.xPosition++;
-					break;
-				case Direction.up:
-                    this.loc.yPosition--;
-                    break;
-                case Direction.down:
-                    this.loc.yPosition++;
-                    break;
-            }
-
+		public void move(Location l)
+		{
+			loc.symbol = temp;
+			temp = l.symbol;
+			loc = l;
+			l.symbol = Symbol.at;
         }
-
 	}
 }

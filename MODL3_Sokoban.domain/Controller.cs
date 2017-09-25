@@ -43,31 +43,76 @@ namespace MODL3_Sokoban.domain
 							direction = Direction.down;
 							break;
 					}
-					maze.character.move(direction);
-					maze.drawMazeArray();
+					if(checkMove(maze.character.loc, direction))
+					{
+						maze.character.move(getNextLoc(direction, maze.character.loc));
+						maze.drawMazeArray();
+					}
 					Console.WriteLine(maze.character.loc.xPosition + "," + maze.character.loc.yPosition);
 				}
 			}
 		}
-
 		public bool checkMove(Location l, Direction d)
 		{
-			Location nextLoc = maze.getNextLoc(d, l);
-			if (nextLoc.role.Equals(Symbol.dot) || nextLoc.role.Equals(Symbol.x))
+			Location nextLoc = getNextLoc(d, l);
+			if (nextLoc.symbol.Equals(Symbol.dot) || nextLoc.symbol.Equals(Symbol.x))
 			{
 				return true;
 			}
-			if (nextLoc.role.Equals(Symbol.o) || nextLoc.role.Equals(Symbol.zero))
+			if (nextLoc.symbol.Equals(Symbol.o) || nextLoc.symbol.Equals(Symbol.zero))
 			{
-				if (l.role.Equals(Symbol.at))
+				if (l.symbol.Equals(Symbol.at))
 				{
-					if (checkMove(maze.getNextLoc(d, l), d))
+					if (checkMove(getNextLoc(d, l), d))
 					{
 						return true;
 					}
 				}
 			}
 			return false;
+		}
+		public Location getNextLoc(Direction d, Location l)
+		{
+			int x = l.xPosition;
+			int y = l.yPosition;
+
+			switch (d)
+			{
+				case Direction.left:
+					if (l.xPosition > 0)
+					{
+						x = x - 1;
+					}
+					break;
+				case Direction.right:
+					if (l.xPosition < maze.width)
+					{
+						x = x + 1;
+					}
+					break;
+				case Direction.up:
+					if (l.yPosition > 0)
+					{
+						y = y - 1;
+					}
+					break;
+				case Direction.down:
+					if (l.yPosition < maze.height)
+					{
+						y = y + 1;
+					}
+					break;
+			}
+
+			foreach (Location element in maze.locList)
+			{
+				if (element.xPosition == x && element.yPosition == y)
+				{
+					return element;
+				}
+			}
+
+			return null;
 		}
 	}
 }
