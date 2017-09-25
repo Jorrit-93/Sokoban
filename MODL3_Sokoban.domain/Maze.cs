@@ -96,4 +96,49 @@ namespace MODL3_Sokoban.domain
             width = arraySize / height;
         }
     }
+
+		public Location getNextLoc(Direction d, Location l)
+		{
+			int x = l.xPosition;
+			int y = l.yPosition;
+
+			switch (d)
+			{
+				case Direction.left:
+					if (l.xPosition > 0)
+					{
+						x = x - 1;
+					}
+					return null;
+				case Direction.right:
+					if (l.xPosition < width)
+					{
+						x = x + 1;
+					}
+					return null;
+				case Direction.up:
+					if (l.yPosition > 0)
+					{
+						y = y - 1;
+					}
+					return null;
+				case Direction.down:
+					if (l.yPosition < height)
+					{
+						y = y + 1;
+					}
+					return null;
+			}
+
+			foreach (Location element in locList)
+			{
+				if (element.xPosition == x && element.yPosition == y)
+				{
+					return element;
+				}
+			}
+
+			return null;
+		}
+	}
 }

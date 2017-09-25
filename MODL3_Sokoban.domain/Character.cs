@@ -8,7 +8,7 @@ namespace MODL3_Sokoban.domain
 {
 	class Character
 	{
-        Location loc;
+        public Location loc { get; set; }
 
         public Character(Location loc)
         {
