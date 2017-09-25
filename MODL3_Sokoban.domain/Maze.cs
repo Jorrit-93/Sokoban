@@ -26,7 +26,7 @@ namespace MODL3_Sokoban.domain
         int arraySize = 0;
         public void loadMaze(int mazeNumber)
         {
-            lines = System.IO.File.ReadAllLines(@"P:\Avans\Desktop\Blok 5\PROG5\Sokoban\Doolhof\doolhof" + mazeNumber + ".txt");
+            lines = System.IO.File.ReadAllLines(@"doolhof" + mazeNumber + ".txt");
             Console.Clear();
             foreach (string line in lines)
             {
