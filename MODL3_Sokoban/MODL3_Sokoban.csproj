@@ -49,6 +49,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MODL3_Sokoban.domain\MODL3_Sokoban.domain.csproj">
+      <Project>{475427b5-ff9f-4d17-b151-2d06a037cfc1}</Project>
+      <Name>MODL3_Sokoban.domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
