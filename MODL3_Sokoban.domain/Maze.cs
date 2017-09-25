@@ -84,7 +84,7 @@ namespace MODL3_Sokoban.domain
 
         public void determineArraySize(int mazeNumber)
         {
-            string[] templines = System.IO.File.ReadAllLines(@"P:\Avans\Desktop\Blok 5\PROG5\Sokoban\Doolhof\doolhof" + mazeNumber + ".txt");
+            string[] templines = System.IO.File.ReadAllLines(@"doolhof" + mazeNumber + ".txt");
             foreach (string line in templines)
             {
                 height++;
@@ -95,7 +95,6 @@ namespace MODL3_Sokoban.domain
             }
             width = arraySize / height;
         }
-    }
 
 		public Location getNextLoc(Direction d, Location l)
 		{
