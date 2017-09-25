@@ -8,5 +8,6 @@ namespace MODL3_Sokoban.domain
 {
 	class Maze
 	{
+
 	}
 }

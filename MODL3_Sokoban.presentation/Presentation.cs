@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.presentation
 {
-    public class Class1
+    public class Presentation
     {
+		public int test;
     }
 }
