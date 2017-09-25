@@ -8,6 +8,8 @@ namespace MODL3_Sokoban.domain
 {
 	class Maze
 	{
-		public List<List<Location>> grid { get; set; }
+		public Location[] grid { get; set; }
+		public int height { get; set; }
+		public int width { get; set; }
 	}
 }
