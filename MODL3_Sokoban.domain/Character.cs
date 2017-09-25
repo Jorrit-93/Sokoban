@@ -9,5 +9,6 @@ namespace MODL3_Sokoban.domain
 	class Character
 	{
 		public int test;
+        public string test2;
 	}
 }
