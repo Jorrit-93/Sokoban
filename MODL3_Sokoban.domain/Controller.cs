@@ -10,7 +10,6 @@ namespace MODL3_Sokoban.domain
 	{
 		public bool checkMove(Location l, Direction d, Maze m)
 		{
-
 			Location nextLoc = m.getNextLoc(d, l);
 			if (nextLoc.role.Equals(Symbol.dot) || nextLoc.role.Equals(Symbol.x))
 			{
