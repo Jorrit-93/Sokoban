@@ -15,5 +15,25 @@ namespace MODL3_Sokoban.domain
             this.loc = loc;
         }
 
+        public void move(Direction input)
+        {
+            switch (input)
+            {
+                case Direction.up:
+                    this.loc.yPosition++;
+                    break;
+                case Direction.right:
+                    this.loc.xPosition++;
+                    break;
+                case Direction.left:
+                    this.loc.xPosition--;
+                    break;
+                case Direction.down:
+                    this.loc.yPosition--;
+                    break;
+            }
+
+        }
+
 	}
 }

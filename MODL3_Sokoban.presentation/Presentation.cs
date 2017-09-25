@@ -8,6 +8,6 @@ namespace MODL3_Sokoban.presentation
 {
     public class Presentation
     {
-		public int test;
+        
     }
 }

@@ -46,6 +46,7 @@
     <Compile Include="Direction.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Maze.cs" />
+    <Compile Include="Presentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbol.cs" />
   </ItemGroup>

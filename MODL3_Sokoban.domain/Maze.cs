@@ -13,10 +13,17 @@ namespace MODL3_Sokoban.domain
 		public int height { get; set; }
 		public int width { get; set; }
 
+        public Maze(int num)
+        {
+            determineArraySize(num);
+            locList = new Location[arraySize];
+        }
+
         string[] lines;
         int xIndex = 0;
         int yIndex = 0;
         int listIndex = 0;
+        int arraySize = 0;
         public void loadMaze(int mazeNumber)
         {
             lines = System.IO.File.ReadAllLines(@"P:\Avans\Desktop\Blok 5\PROG5\Sokoban\Doolhof\doolhof" + mazeNumber + ".txt");
@@ -34,6 +41,7 @@ namespace MODL3_Sokoban.domain
                 xIndex = 0;
                 yIndex++;
             }
+            Console.WriteLine(height + " " + width);
             Console.ReadLine();
         }
 
@@ -61,6 +69,7 @@ namespace MODL3_Sokoban.domain
             }
             else if (c == '@')
             {
+                character = new Character(new Location(xIndex, yIndex, Symbol.at));
                 return Symbol.at;
             }
             else if (c == ' ')
@@ -71,6 +80,20 @@ namespace MODL3_Sokoban.domain
             {
                 return Symbol.whitespace;
             }
+        }
+
+        public void determineArraySize(int mazeNumber)
+        {
+            string[] templines = System.IO.File.ReadAllLines(@"P:\Avans\Desktop\Blok 5\PROG5\Sokoban\Doolhof\doolhof" + mazeNumber + ".txt");
+            foreach (string line in templines)
+            {
+                height++;
+                foreach (char c in line)
+                {
+                    arraySize++;
+                }
+            }
+            width = arraySize / height;
         }
     }
 }

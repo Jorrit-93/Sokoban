@@ -13,7 +13,10 @@ namespace MODL3_Sokoban.domain
 		public Location rightLoc;
 		public Location upLoc;
 		public Location downLoc;
-		public int xPosition { get; set; }
+        private int x;
+        private int y;
+
+        public int xPosition { get; set; }
 		public int yPosition { get; set; }
 
 		public Location(int x, int y, Symbol role)
@@ -23,7 +26,13 @@ namespace MODL3_Sokoban.domain
 			yPosition = y;
 		}
 
-		public Location getLeftLoc(Direction d, Maze m)
+        public Location(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public Location getLeftLoc(Direction d, Maze m)
 		{
 			int x = xPosition;
 			int y = yPosition;
@@ -41,25 +50,7 @@ namespace MODL3_Sokoban.domain
 				case Direction.down:
 					y = y + 1;
 					break;
-			}
-
-			foreach(Location l in m.locList) {
-				if(l.xPosition == x && l.yPosition == y)
-				{
-					if(Maze.character)
-					switch (l.role)
-					{
-						case Symbol.dot:
-							return l;
-						case Symbol.hashtag:
-							return null;
-						case Symbol.o:
-							return l;
-						case Symbol.zero:
-							return l;
-					}
-				}
-			}
+			}	
 			return null;
 		}
 	}

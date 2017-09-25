@@ -11,6 +11,8 @@ namespace MODL3_Sokoban
 	{
 		static void Main(string[] args)
 		{
+            Presentation presentation = new Presentation();
+            presentation.showInfo();
 		}
 	}
 }
