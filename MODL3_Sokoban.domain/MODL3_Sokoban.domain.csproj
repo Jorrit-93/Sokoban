@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BaseFloor.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Crate.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Location.cs" />
