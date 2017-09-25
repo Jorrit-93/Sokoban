@@ -11,9 +11,6 @@ namespace MODL3_Sokoban
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("\\" + Symbol.u0023);
-			Console.ReadLine();
-			
 		}
 	}
 }
