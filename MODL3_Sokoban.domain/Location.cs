@@ -9,12 +9,16 @@ namespace MODL3_Sokoban.domain
 	class Location
 	{
 		public Symbol role { get; set; }
+		public Location leftLoc;
+		public Location rightLoc;
+		public Location upLoc;
+		public Location downLoc;
 		public int xPosition { get; set; }
 		public int yPosition { get; set; }
 
 		public Location(int x, int y, Symbol role)
 		{
-			this.role = role;
+            this.role = role;
 			xPosition = x;
 			yPosition = y;
 		}
