@@ -27,7 +27,6 @@ namespace MODL3_Sokoban.domain
         public void loadMaze(int mazeNumber)
         {
             lines = System.IO.File.ReadAllLines(@"doolhof" + mazeNumber + ".txt");
-            Console.Clear();
             foreach (string line in lines)
             {
                 foreach (char c in line)
@@ -35,11 +34,23 @@ namespace MODL3_Sokoban.domain
                     locList[listIndex] = new Location(xIndex, yIndex, filterChar(c));
                     xIndex++;
                     listIndex++;
+                }
+                xIndex = 0;
+                yIndex++;
+            }
+        }
+
+        public void drawMaze(int mazeNumber)
+        {
+            lines = System.IO.File.ReadAllLines(@"doolhof" + mazeNumber + ".txt");
+            Console.Clear();
+            foreach (string line in lines)
+            {
+                foreach (char c in line)
+                {
                     Console.Write(c);
                 }
                 Console.WriteLine("\b");
-                xIndex = 0;
-                yIndex++;
             }
             Console.WriteLine(height + " " + width);
             Console.ReadLine();
