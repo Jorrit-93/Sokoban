@@ -48,7 +48,14 @@ namespace MODL3_Sokoban.domain
 			{
 				for (int j = 0; j < width; j++)
 				{
-					Console.Write(filterSymbol(locList[index].symbol));
+                    if (character.loc.xPosition == j && character.loc.yPosition == i)
+                    {
+                        Console.Write('@');
+                    }
+                    else
+                    {
+                        Console.Write(filterSymbol(locList[index].symbol));
+                    }					
 					index++;
 				}
 				Console.WriteLine("\b");
@@ -81,7 +88,7 @@ namespace MODL3_Sokoban.domain
             else if (c == '@')
             {
                 character = new Character(new Location(xIndex, yIndex, Symbol.at));
-                return Symbol.at;
+                return Symbol.dot;
             }
             else if (c == ' ')
             {
