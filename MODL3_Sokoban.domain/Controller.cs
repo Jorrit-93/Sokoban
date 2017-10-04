@@ -16,6 +16,8 @@ namespace MODL3_Sokoban.domain
 		public void loadMaze(int mazeNumber)
 		{
 			_maze = new Maze();
+			Location newLoc;
+			Location prevLoc;
 			string[] lines;
 			lines = System.IO.File.ReadAllLines(@"doolhof" + mazeNumber + ".txt");
 			int xIndex = 0;
@@ -24,7 +26,7 @@ namespace MODL3_Sokoban.domain
 			{
 				foreach (char c in line)
 				{
-					Location newLoc = new Location(xIndex, yIndex, filterChar(c));
+					newLoc = new Location(xIndex, yIndex, filterChar(c));
 					xIndex++;
 				}
 				xIndex = 0;

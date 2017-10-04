@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.domain
 {
-	class Character : Movable
+	public class Character : Movable
 	{
         public Character()
         {
