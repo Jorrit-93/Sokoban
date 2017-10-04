@@ -15,7 +15,7 @@ namespace MODL3_Sokoban.domain
 
         public void ChangeSymbol()
         {
-
+            this.symbol = Symbol.zero;
         }
 	}
 }

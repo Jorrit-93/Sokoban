@@ -6,20 +6,41 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.domain
 {
-    class Worker : Movable
+    public class Worker : Movable
     {
+        Random randomLoc = new Random();
         public Worker()
         {
 
         }
-        public void Move()
+        public new void Move()
         {
+            int rnd = randomLoc.Next(1,5);
 
+            switch (rnd)
+            {
+                case 1:
+                    this.currentLoc = currentLoc.leftLoc;
+                    break;
+                case 2:
+                    this.currentLoc = currentLoc.rightLoc;
+                    break;
+                case 3:
+                    this.currentLoc = currentLoc.upLoc;
+                    break;
+                case 4:
+                    this.currentLoc = currentLoc.downLoc;
+                    break;
+            }
+            
         }
 
-        public void ChangeSymbol()
+        public new void ChangeSymbol()
         {
-
+            if (this.symbol == Symbol.dollar)
+                this.symbol = Symbol.z;
+            else
+                this.symbol = Symbol.dollar;
         }
     }
 }

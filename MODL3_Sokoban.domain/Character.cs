@@ -14,7 +14,7 @@ namespace MODL3_Sokoban.domain
         }
 		public void Move(Location l)
 		{
-			
+            currentLoc = l;
         }
 	}
 }
