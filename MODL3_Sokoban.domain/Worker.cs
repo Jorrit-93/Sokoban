@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.domain
 {
-	class Character : Movable
-	{
-        public Character()
+    class Worker : Movable
+    {
+        public Worker()
         {
 
         }
-		public void Move(Location l)
-		{
-			
+        public void Move()
+        {
+
         }
-	}
+
+        public void ChangeSymbol()
+        {
+
+        }
+    }
 }

@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.domain
 {
-	class Character : Movable
-	{
-        public Character()
+    class Trap : BaseFloor
+    {
+        public int stepCounter { get; set; }
+
+        public Trap()
         {
 
         }
-		public void Move(Location l)
-		{
-			
+
+        public void ChangeSymbol()
+        {
+
         }
-	}
+    }
 }
