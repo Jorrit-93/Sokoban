@@ -29,15 +29,21 @@ namespace MODL3_Sokoban.domain
 		{
 			if(firstLoc != null)
 			{
-				if (loc.xPosition < width)
+				if (loc.xPosition > 0 && loc.xPosition < width - 1)
 				{
 					lastLoc.rightLoc = loc;
 					loc.leftLoc = lastLoc;
 				}
-				else if (loc.yPosition != 1)
+				else if (loc.xPosition == 0)
 				{
+					secondRowLoc = loc;
+				}
+				else if (loc.yPosition > 0)
+				{
+					lastLoc.rightLoc = loc;
+					loc.leftLoc = lastLoc;
 					Location temp = secondRowLoc;
-					for (int index = 1; index < width; index++)
+					for (int index = 0; index < width; index++)
 					{
 						firstRowLoc.downLoc = secondRowLoc;
 						secondRowLoc.upLoc = firstRowLoc;
@@ -48,7 +54,8 @@ namespace MODL3_Sokoban.domain
 				}
 				else
 				{
-					secondRowLoc = loc;
+					lastLoc.rightLoc = loc;
+					loc.leftLoc = lastLoc;
 				}
 			}
 			else

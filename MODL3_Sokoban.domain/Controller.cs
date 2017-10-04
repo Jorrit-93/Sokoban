@@ -8,60 +8,14 @@ namespace MODL3_Sokoban.domain
 {
 	public class Controller
 	{
-		public Presentation
+		public Presentation _pres;
 		public Maze _maze;
 		public Controller()
 		{
-
-		}
-		public void showInfo()
-		{
-			Console.WriteLine("┌────────────────────────────────────────────────────┐");
-			Console.WriteLine("| Welkom bij Sokoban                                 |");
-			Console.WriteLine("|                                                    |");
-			Console.WriteLine("| betekenis van de symbolen   |   doel van het spel  |");
-			Console.WriteLine("|                             |                      |");
-			Console.WriteLine("| spatie : outerspace         |   duw met de truck   |");
-			Console.WriteLine("|      █ : muur               |   de krat(ten)       |");
-			Console.WriteLine("|      · : vloer              |   naar de bestemming |");
-			Console.WriteLine("|      O : krat               |                      |");
-			Console.WriteLine("|      0 : krat op bestemming |                      |");
-			Console.WriteLine("|      x : bestemming         |                      |");
-			Console.WriteLine("|      @ : truck              |                      |");
-			Console.WriteLine("└────────────────────────────────────────────────────┘");
-			Console.WriteLine("");
-			askMazeNumber();
-		}
-
-		public int askMazeNumber()
-		{
-			int num = 0;
-			char c = '?';
-			while ((num < 1 || num > 4) && c != 's')
-			{
-				Console.WriteLine("> Kies een doolhof (1 - 4), s = stop");
-				ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
-				c = consoleKeyInfo.KeyChar;
-				Console.WriteLine();
-				if (c >= '1' && c <= '4')
-				{
-					//create maze
-					string value = char.ToString(consoleKeyInfo.KeyChar);
-					num = Convert.ToInt32(value);
-					maze = new Maze(num);
-					maze.loadMaze(num);
-					maze.drawMazeArray();
-				}
-				else if (c != 's')
-				{
-					Console.WriteLine("> ?");
-				}
-			}
-			if (c == 's')
-			{
-				num = -1;
-			}
-			return num;
+			_pres = new Presentation(this);
+			_pres.showInfo();
+			loadMaze(_pres.askMazeNumber());
+			drawMaze();
 		}
 
 		public void loadMaze(int mazeNumber)
@@ -78,14 +32,55 @@ namespace MODL3_Sokoban.domain
 				foreach (char c in line)
 				{
 					Location newLoc = null;
-					switch(filterChar(c))
+					Character newCharacter = null;
+					Worker newWorker = null;
+					Crate newCrate = null;
+					switch (filterChar(c))
 					{
 						case Symbol.at:
 							newLoc = new BaseFloor(xIndex, yIndex, Symbol.dot);
-							_maze.crateList.Add(new Crate());
+							newCharacter = new Character(Symbol.at);
+							newCharacter.currentLoc = newLoc;
+							_maze.character = newCharacter;
 							break;
 						case Symbol.o:
 							newLoc = new BaseFloor(xIndex, yIndex, Symbol.dot);
+							newCrate = new Crate(Symbol.o);
+							newCrate.currentLoc = newLoc;
+							_maze.crateList.Add(newCrate);
+							break;
+						case Symbol.zero:
+							newLoc = new BaseFloor(xIndex, yIndex, Symbol.x);
+							newCrate = new Crate(Symbol.o);
+							newCrate.currentLoc = newLoc;
+							_maze.crateList.Add(newCrate);
+							break;
+						case Symbol.dollar:
+							newLoc = new BaseFloor(xIndex, yIndex, Symbol.dot);
+							newWorker = new Worker(Symbol.dollar);
+							newWorker.currentLoc = newLoc;
+							_maze.worker = newWorker;
+							break;
+						case Symbol.z:
+							newLoc = new BaseFloor(xIndex, yIndex, Symbol.dot);
+							newWorker = new Worker(Symbol.z);
+							newWorker.currentLoc = newLoc;
+							_maze.worker = newWorker;
+							break;
+						case Symbol.dot:
+							newLoc = new BaseFloor(xIndex, yIndex, Symbol.dot);
+							break;
+						case Symbol.x:
+							newLoc = new BaseFloor(xIndex, yIndex, Symbol.x);
+							break;
+						case Symbol.wave:
+							newLoc = new Trap(xIndex, yIndex, Symbol.wave);
+							break;
+						case Symbol.whitespace:
+							newLoc = new Trap(xIndex, yIndex, Symbol.whitespace);
+							break;
+						default:
+							newLoc = new Location(xIndex, yIndex, filterChar(c));
 							break;
 					}
 					_maze.addLoc(newLoc);
@@ -95,7 +90,7 @@ namespace MODL3_Sokoban.domain
 				yIndex++;
 			}
 		}
-		public void drawMazeArray()
+		public void drawMaze()
 		{
 			Console.Clear();
 			_maze.firstRowLoc = _maze.firstLoc;
@@ -108,9 +103,13 @@ namespace MODL3_Sokoban.domain
 					_maze.firstRowLoc = _maze.firstRowLoc.rightLoc;
 				}
 				Console.WriteLine("\b");
-				_maze.firstRowLoc = _maze.secondRowLoc;
-				_maze.secondRowLoc = _maze.firstLoc.downLoc;
+				if(_maze.secondRowLoc != null)
+				{
+					_maze.firstRowLoc = _maze.secondRowLoc;
+					_maze.secondRowLoc = _maze.firstRowLoc.downLoc;
+				}
 			}
+			Console.ReadLine();
 		}
 
 		public Symbol filterChar(char c)

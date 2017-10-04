@@ -8,11 +8,11 @@ namespace MODL3_Sokoban.domain
 {
     public class Worker : Movable
     {
-        public Worker()
-        {
+		public Worker(Symbol symbol) : base(symbol)
+		{
+		}
 
-        }
-        public void Move()
+		public void Move()
         {
 
         }

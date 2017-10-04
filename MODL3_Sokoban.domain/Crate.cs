@@ -8,7 +8,11 @@ namespace MODL3_Sokoban.domain
 {
 	public class Crate : Movable
 	{
-        public void Move()
+		public Crate(Symbol symbol) : base(symbol)
+		{
+		}
+
+		public void Move()
         {
 
         }

@@ -14,6 +14,18 @@ namespace MODL3_Sokoban.domain
 		{
 		}
 
+		public new Symbol drawLoc()
+		{
+			if (_movable == null)
+			{
+				return symbol;
+			}
+			else
+			{
+				return _movable.symbol;
+			}
+		}
+
 		public Movable MoveFromThisField()
 		{
 			return _movable;

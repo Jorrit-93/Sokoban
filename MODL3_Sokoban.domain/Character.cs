@@ -8,10 +8,10 @@ namespace MODL3_Sokoban.domain
 {
 	public class Character : Movable
 	{
-        public Character()
-        {
+		public Character(Symbol symbol) : base(symbol)
+		{
+		}
 
-        }
 		public void Move(Location l)
 		{
 			

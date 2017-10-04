@@ -30,5 +30,10 @@ namespace MODL3_Sokoban.domain
 			this.xPosition = x;
 			this.yPosition = y;
 		}
+
+		public Symbol drawLoc()
+		{
+			return symbol;
+		}
 	}
 }
