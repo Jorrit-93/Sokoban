@@ -8,29 +8,108 @@ namespace MODL3_Sokoban.domain
 {
 	public class Controller
 	{
+		public Presentation
 		public Maze _maze;
 		public Controller()
 		{
 
 		}
+		public void showInfo()
+		{
+			Console.WriteLine("┌────────────────────────────────────────────────────┐");
+			Console.WriteLine("| Welkom bij Sokoban                                 |");
+			Console.WriteLine("|                                                    |");
+			Console.WriteLine("| betekenis van de symbolen   |   doel van het spel  |");
+			Console.WriteLine("|                             |                      |");
+			Console.WriteLine("| spatie : outerspace         |   duw met de truck   |");
+			Console.WriteLine("|      █ : muur               |   de krat(ten)       |");
+			Console.WriteLine("|      · : vloer              |   naar de bestemming |");
+			Console.WriteLine("|      O : krat               |                      |");
+			Console.WriteLine("|      0 : krat op bestemming |                      |");
+			Console.WriteLine("|      x : bestemming         |                      |");
+			Console.WriteLine("|      @ : truck              |                      |");
+			Console.WriteLine("└────────────────────────────────────────────────────┘");
+			Console.WriteLine("");
+			askMazeNumber();
+		}
+
+		public int askMazeNumber()
+		{
+			int num = 0;
+			char c = '?';
+			while ((num < 1 || num > 4) && c != 's')
+			{
+				Console.WriteLine("> Kies een doolhof (1 - 4), s = stop");
+				ConsoleKeyInfo consoleKeyInfo = Console.ReadKey();
+				c = consoleKeyInfo.KeyChar;
+				Console.WriteLine();
+				if (c >= '1' && c <= '4')
+				{
+					//create maze
+					string value = char.ToString(consoleKeyInfo.KeyChar);
+					num = Convert.ToInt32(value);
+					maze = new Maze(num);
+					maze.loadMaze(num);
+					maze.drawMazeArray();
+				}
+				else if (c != 's')
+				{
+					Console.WriteLine("> ?");
+				}
+			}
+			if (c == 's')
+			{
+				num = -1;
+			}
+			return num;
+		}
+
 		public void loadMaze(int mazeNumber)
 		{
-			_maze = new Maze();
-			Location newLoc;
-			Location prevLoc;
 			string[] lines;
 			lines = System.IO.File.ReadAllLines(@"doolhof" + mazeNumber + ".txt");
 			int xIndex = 0;
 			int yIndex = 0;
+			_maze = new Maze();
+			_maze.width = lines[0].Length;
+			_maze.height = lines.Length;
 			foreach (string line in lines)
 			{
 				foreach (char c in line)
 				{
-					newLoc = new Location(xIndex, yIndex, filterChar(c));
+					Location newLoc = null;
+					switch(filterChar(c))
+					{
+						case Symbol.at:
+							newLoc = new BaseFloor(xIndex, yIndex, Symbol.dot);
+							_maze.crateList.Add(new Crate());
+							break;
+						case Symbol.o:
+							newLoc = new BaseFloor(xIndex, yIndex, Symbol.dot);
+							break;
+					}
+					_maze.addLoc(newLoc);
 					xIndex++;
 				}
 				xIndex = 0;
 				yIndex++;
+			}
+		}
+		public void drawMazeArray()
+		{
+			Console.Clear();
+			_maze.firstRowLoc = _maze.firstLoc;
+			_maze.secondRowLoc = _maze.firstLoc.downLoc;
+			for (int i = 0; i < _maze.height; i++)
+			{
+				for (int j = 0; j < _maze.width; j++)
+				{
+					Console.Write(filterSymbol(_maze.firstRowLoc.symbol));
+					_maze.firstRowLoc = _maze.firstRowLoc.rightLoc;
+				}
+				Console.WriteLine("\b");
+				_maze.firstRowLoc = _maze.secondRowLoc;
+				_maze.secondRowLoc = _maze.firstLoc.downLoc;
 			}
 		}
 
@@ -75,6 +154,50 @@ namespace MODL3_Sokoban.domain
 			else
 			{
 				return Symbol.whitespace;
+			}
+		}
+
+		public char filterSymbol(Symbol s)
+		{
+			if (s == Symbol.hashtag)
+			{
+				return '█';
+			}
+			else if (s == Symbol.dot)
+			{
+				return '.';
+			}
+			else if (s == Symbol.o)
+			{
+				return 'o';
+			}
+			else if (s == Symbol.zero)
+			{
+				return '0';
+			}
+			else if (s == Symbol.x)
+			{
+				return 'x';
+			}
+			else if (s == Symbol.at)
+			{
+				return '@';
+			}
+			else if (s == Symbol.wave)
+			{
+				return '~';
+			}
+			else if (s == Symbol.z)
+			{
+				return 'z';
+			}
+			else if (s == Symbol.dollar)
+			{
+				return '$';
+			}
+			else
+			{
+				return ' ';
 			}
 		}
 	}

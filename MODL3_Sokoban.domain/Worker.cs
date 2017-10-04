@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.domain
 {
-    class Worker : Movable
+    public class Worker : Movable
     {
         public Worker()
         {
