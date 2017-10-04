@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.domain
 {
-	class Maze
+	public class Maze
 	{
         public Character character { get; set; }
         public Location firstLoc { get; set; }

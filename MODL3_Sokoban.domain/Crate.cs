@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.domain
 {
-	class Crate : Movable
+	public class Crate : Movable
 	{
         public void Move()
         {

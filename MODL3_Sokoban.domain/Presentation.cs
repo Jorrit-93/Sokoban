@@ -40,6 +40,7 @@ namespace MODL3_Sokoban.domain
                 Console.WriteLine();
                 if (c >= '1' && c <= '4')
                 {
+					//create maze
                     string value = char.ToString(consoleKeyInfo.KeyChar);
                     num = Convert.ToInt32(value);
                     maze = new Maze(num);
