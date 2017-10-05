@@ -1,6 +1,6 @@
 ﻿namespace MODL3_Sokoban.domain
 {
-	internal class Trap : BaseFloor
+	public class Trap : BaseFloor
 	{
         public int stepCounter { get; set; }
 

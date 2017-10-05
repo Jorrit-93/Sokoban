@@ -86,6 +86,7 @@ namespace MODL3_Sokoban.domain
 							break;
 						case '~' :
 							newLoc = new Trap(xIndex, yIndex, '~');
+							_maze.trapList.Add((Trap)newLoc);
 							break;
 						case ' ':
 							newLoc = new Location(xIndex, yIndex, ' ');
@@ -153,6 +154,14 @@ namespace MODL3_Sokoban.domain
 				}
 			}
 			_maze.character.getNextLoc(_maze.character.currentLoc, direction);
+			if(_maze.worker != null)
+			{
+				Direction workerDirection = _maze.worker.WorkerStatusUpdate();
+				if (workerDirection != 0)
+				{
+					_maze.worker.getNextLoc(_maze.worker.currentLoc, workerDirection);
+				}
+			}
 			DrawMaze();
 		}
 	}

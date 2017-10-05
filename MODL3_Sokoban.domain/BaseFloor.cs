@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MODL3_Sokoban.domain
 {
-	class BaseFloor : Location
+	public class BaseFloor : Location
 	{
 		public Movable _movable { get; set; }
 

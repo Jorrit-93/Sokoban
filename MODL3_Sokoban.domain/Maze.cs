@@ -14,6 +14,7 @@ namespace MODL3_Sokoban.domain
 		public int width { get; set; }
 
         public List<Crate> crateList;
+		public List<Trap> trapList;
 
 		public Location firstLoc;
 		public Location lastLoc;
@@ -23,6 +24,7 @@ namespace MODL3_Sokoban.domain
 		public Maze()
         {
 			crateList = new List<Crate>();
+			trapList = new List<Trap>();
         }
 		
 		public void addLoc(Location loc)

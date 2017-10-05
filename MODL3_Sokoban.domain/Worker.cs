@@ -14,25 +14,21 @@ namespace MODL3_Sokoban.domain
 		{
 		}
 
-		public new void Move()
+		public Direction RandomDirection()
         {
             int rnd = random.Next(1,5);
-
             switch (rnd)
             {
                 case 1:
-                    this.currentLoc = currentLoc.leftLoc;
-                    break;
+                    return Direction.left;
                 case 2:
-                    this.currentLoc = currentLoc.rightLoc;
-                    break;
-                case 3:
-                    this.currentLoc = currentLoc.upLoc;
-                    break;
-                case 4:
-                    this.currentLoc = currentLoc.downLoc;
-                    break;
-            }            
+					return Direction.right;
+				case 3:
+					return Direction.up;
+				case 4:
+					return Direction.down;
+			}
+			return 0;
         }
 
         public new void ChangeSymbol()
@@ -43,43 +39,29 @@ namespace MODL3_Sokoban.domain
                 this.symbol = '$';
         }
 
-        public void WorkerStatusUpdate()
+        public Direction WorkerStatusUpdate()
         {
             if (this.symbol == '$')
-            {
-                TriggerSleep();
-            }
-            else if (this.symbol == 'z')
-            {
-                TriggerWakeUp();
-            }
-            else
-                return;
-        }
-
-        public void TriggerSleep()
-        {
-            int rnd = random.Next(1, 5);
-
-            if (rnd == 1)
-            {
-                this.symbol = 'z';
-            }
-            else
-            {
-                Move();
-            }
-        }
-
-        public void TriggerWakeUp()
-        {
-            int rnd = random.Next(1, 11);
-
-            if (rnd == 1)
-            {
-                this.symbol = '$';
-                Move();
-            }
-        }
+			{
+				int rnd = random.Next(1, 5);
+				if (rnd == 1)
+				{
+					ChangeSymbol();
+				}
+			}
+			else if (this.symbol == 'z')
+			{
+				int rnd = random.Next(1, 11);
+				if (rnd == 1)
+				{
+					ChangeSymbol();
+				}
+			}
+			if (this.symbol == '$')
+			{
+				return RandomDirection();
+			}
+			return 0;
+		}
     }
 }

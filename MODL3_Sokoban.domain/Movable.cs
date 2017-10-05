@@ -41,7 +41,7 @@ namespace MODL3_Sokoban.domain
         {
 
         }
-		public void getNextLoc(Location l, Direction d)
+		public bool getNextLoc(Location l, Direction d)
 		{
 			switch (d)
 			{
@@ -70,11 +70,14 @@ namespace MODL3_Sokoban.domain
 			{
 				return true;
             }
-			if ((l.drawLoc().Equals('o') || l.drawLoc().Equals('0')) && currentLoc.drawLoc().Equals('@'))
+			if ((l.drawLoc().Equals('o') || l.drawLoc().Equals('0')) && canMoveObject)
 			{
 				BaseFloor crateFloor = (BaseFloor)l;
 				crateFloor._movable.getNextLoc(l, d);
-				return true;
+				if(crateFloor._movable.checkMove(l, d))
+				{
+					return true;
+				}
 			}
 			return false;
 		}
