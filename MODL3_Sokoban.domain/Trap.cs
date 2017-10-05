@@ -11,34 +11,44 @@
 
         public void DropCrate()
         {
-            if (_movable.currentLoc.xPosition == xPosition && _movable.currentLoc.yPosition == yPosition)
+            if (_movable.symbol == 'o')
             {
-                if (_movable.symbol == 'o')
-                {
-                    _movable = null;
-                }
+                _movable = null;
             }
         }
         
         public void RaiseStepCounter()
         {
-            if (_movable.currentLoc.xPosition == xPosition && _movable.currentLoc.yPosition == yPosition)
-            {
-                if (_movable.symbol == 'o' || _movable.symbol == '@')
-                {
-                    stepCounter++;
-                    if (stepCounter >= 3)
-                    {
-                        ChangeSymbol();
-                        DropCrate();
-                    }
-                }
-            }                      
-        }
+			if (_movable != null)
+			{
+				if (_movable.symbol == '@')
+				{
+					stepCounter++;
+				}
+				if (stepCounter >= 3)
+				{
+					ChangeSymbol();
+					DropCrate();
+				}
+			}
+		}
 
         public void ChangeSymbol()
         {
             symbol = ' ';
         }
+
+		public override char drawLoc()
+		{
+			RaiseStepCounter();
+			if (_movable == null)
+			{
+				return symbol;
+			}
+			else
+			{
+				return _movable.symbol;
+			}
+		}
 	}
 }

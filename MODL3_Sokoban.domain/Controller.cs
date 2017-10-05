@@ -86,7 +86,6 @@ namespace MODL3_Sokoban.domain
 							break;
 						case '~' :
 							newLoc = new Trap(xIndex, yIndex, '~');
-							_maze.trapList.Add((Trap)newLoc);
 							break;
 						case ' ':
 							newLoc = new Location(xIndex, yIndex, ' ');

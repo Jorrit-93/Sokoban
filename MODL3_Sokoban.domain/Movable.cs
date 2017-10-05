@@ -44,7 +44,7 @@ namespace MODL3_Sokoban.domain
 
 		public bool checkMove(Location nextLoc, Direction direction)
         {
-			if (nextLoc.drawLoc().Equals('.') || nextLoc.drawLoc().Equals('x') || nextLoc.drawLoc().Equals('~'))
+			if (nextLoc.drawLoc().Equals('.') || nextLoc.drawLoc().Equals('x') || nextLoc.drawLoc().Equals('~') || nextLoc.drawLoc().Equals(' '))
 			{
 				return true;
             }
