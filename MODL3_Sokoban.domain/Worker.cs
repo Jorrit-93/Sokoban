@@ -8,7 +8,7 @@ namespace MODL3_Sokoban.domain
 {
     public class Worker : Movable
     {
-        Random randomLoc = new Random();
+        Random random = new Random();
 
 		public Worker(char symbol) : base(symbol)
 		{
@@ -16,7 +16,7 @@ namespace MODL3_Sokoban.domain
 
 		public new void Move()
         {
-            int rnd = randomLoc.Next(1,5);
+            int rnd = random.Next(1,5);
 
             switch (rnd)
             {
@@ -32,8 +32,7 @@ namespace MODL3_Sokoban.domain
                 case 4:
                     this.currentLoc = currentLoc.downLoc;
                     break;
-            }
-            
+            }            
         }
 
         public new void ChangeSymbol()
@@ -42,6 +41,45 @@ namespace MODL3_Sokoban.domain
                 this.symbol = 'z';
             else
                 this.symbol = '$';
+        }
+
+        public void WorkerStatusUpdate()
+        {
+            if (this.symbol == '$')
+            {
+                TriggerSleep();
+            }
+            else if (this.symbol == 'z')
+            {
+                TriggerWakeUp();
+            }
+            else
+                return;
+        }
+
+        public void TriggerSleep()
+        {
+            int rnd = random.Next(1, 5);
+
+            if (rnd == 1)
+            {
+                this.symbol = 'z';
+            }
+            else
+            {
+                Move();
+            }
+        }
+
+        public void TriggerWakeUp()
+        {
+            int rnd = random.Next(1, 11);
+
+            if (rnd == 1)
+            {
+                this.symbol = '$';
+                Move();
+            }
         }
     }
 }
