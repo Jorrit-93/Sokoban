@@ -13,9 +13,30 @@ namespace MODL3_Sokoban.domain
 		public Controller()
 		{
 			_pres = new Presentation(this);
-			_pres.showInfo();
-			LoadMaze(_pres.askMazeNumber());
-			DrawMaze();
+			while (true)
+			{
+				_pres.showInfo();
+				LoadMaze(_pres.askMazeNumber());
+				DrawMaze();
+				bool completed = false;
+				while (!completed)
+				{
+					TakeTurn();
+					DrawMaze();
+					completed = true;
+					foreach (Crate c in _maze.crateList)
+					{
+						if (c.symbol == 'o')
+						{
+							completed = false;
+						}
+					}
+				}
+				Console.WriteLine("YOU WIN!");
+				Console.WriteLine("press 'enter' to continue");
+				Console.ReadLine();
+				Console.Clear();
+			}
 		}
 
 		public void LoadMaze(int mazeNumber)
@@ -56,7 +77,7 @@ namespace MODL3_Sokoban.domain
 							break;
 						case '0':
 							newCrate = new Crate('o');
-							newLoc = new BaseFloor(xIndex, yIndex, 'x');
+							newLoc = new Destination(xIndex, yIndex, 'x');
 							newBase = (BaseFloor)newLoc;
 							newBase._movable = newCrate;
 							newCrate.currentLoc = newLoc;
@@ -82,7 +103,7 @@ namespace MODL3_Sokoban.domain
 							newLoc = new BaseFloor(xIndex, yIndex, '.');
 							break;
 						case 'x':
-							newLoc = new BaseFloor(xIndex, yIndex, 'x');
+							newLoc = new Destination(xIndex, yIndex, 'x');
 							break;
 						case '~' :
 							newLoc = new Trap(xIndex, yIndex, '~');
@@ -120,7 +141,6 @@ namespace MODL3_Sokoban.domain
 					_maze.secondRowLoc = _maze.firstRowLoc.downLoc;
 				}
 			}
-			TakeTurn();
 		}
 
 		public void TakeTurn()
@@ -153,7 +173,7 @@ namespace MODL3_Sokoban.domain
 				}
 			}
 			_maze.character.Move(direction);
-			if(_maze.worker != null)
+			if (_maze.worker != null)
 			{
 				direction = _maze.worker.WorkerStatusUpdate();
 				if (direction != 0)
@@ -161,7 +181,6 @@ namespace MODL3_Sokoban.domain
 					_maze.worker.Move(direction);
 				}
 			}
-			DrawMaze();
 		}
 	}
 }
