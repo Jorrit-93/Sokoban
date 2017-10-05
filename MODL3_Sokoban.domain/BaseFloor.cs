@@ -14,12 +14,7 @@ namespace MODL3_Sokoban.domain
 		{
 		}
 
-		public BaseFloor(int x, int y, char symbol, Movable m) : base(x, y, symbol)
-		{
-			this._movable = m;
-		}
-
-		public new char drawLoc()
+		public override char drawLoc()
 		{
 			if (_movable == null)
 			{

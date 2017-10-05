@@ -41,58 +41,51 @@ namespace MODL3_Sokoban.domain
         {
 
         }
+		public void getNextLoc(Location l, Direction d)
+		{
+			switch (d)
+			{
+				case Direction.left:
+					l = l.leftLoc;
+					break;
+				case Direction.right:
+					l = l.rightLoc;
+					break;
+				case Direction.up:
+					l = l.upLoc;
+					break;
+				case Direction.down:
+					l = l.downLoc;
+					break;
+			}
+			if(checkMove(l, d))
+			{
+				Move(l);
+			}
+		}
 
-        public bool checkMove(Location l, Direction d)
+		public bool checkMove(Location l, Direction d)
         {
-            Location nextLoc = getNextLoc(d, l);
-            if (nextLoc.symbol.Equals('.') || nextLoc.symbol.Equals('x'))
-            {
-                return true;
+			if (l.drawLoc().Equals('.') || l.drawLoc().Equals('x') || l.drawLoc().Equals('~'))
+			{
+				return true;
             }
-            if (nextLoc.symbol.Equals('o') || nextLoc.symbol.Equals('0'))
-            {
-                if (l.symbol.Equals('@'))
-                {
-                    if (checkMove(getNextLoc(d, l), d))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        public Location getNextLoc(Direction d, Location l)
-        {
-            l = currentLoc;
-            switch (d)
-            {
-                case Direction.left:
-                    if (l.leftLoc.xPosition > 0)
-                    {
-                        return l.leftLoc;
-                    }
-                    break;
-                case Direction.right:
-                    if (l.rightLoc.xPosition == 0)
-                    {
-                        return l.rightLoc;
-                    }
-                    break;
-                case Direction.up:
-                    if (l.upLoc.xPosition > 0)
-                    {
-                        return l.upLoc;
-                    }
-                    break;
-                case Direction.down:
-                    if (l.downLoc.xPosition == 0)
-                    {
-                        return l.downLoc;
-                    }
-                    break;
-            }
-            return null;           
-        }
-    }
+			if ((l.drawLoc().Equals('o') || l.drawLoc().Equals('0')) && currentLoc.drawLoc().Equals('@'))
+			{
+				BaseFloor crateFloor = (BaseFloor)l;
+				crateFloor._movable.getNextLoc(l, d);
+				return true;
+			}
+			return false;
+		}
+		public virtual void Move(Location l)
+		{
+			BaseFloor temp;
+			temp = (BaseFloor)l;
+			temp._movable = this;
+			temp = (BaseFloor)currentLoc;
+			temp._movable = null;
+			currentLoc = l;
+		}
+	}
 }

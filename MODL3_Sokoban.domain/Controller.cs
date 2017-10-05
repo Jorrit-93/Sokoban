@@ -14,11 +14,11 @@ namespace MODL3_Sokoban.domain
 		{
 			_pres = new Presentation(this);
 			_pres.showInfo();
-			loadMaze(_pres.askMazeNumber());
-			drawMaze();
+			LoadMaze(_pres.askMazeNumber());
+			DrawMaze();
 		}
 
-		public void loadMaze(int mazeNumber)
+		public void LoadMaze(int mazeNumber)
 		{
 			string[] lines;
 			lines = System.IO.File.ReadAllLines(@"doolhof" + mazeNumber + ".txt");
@@ -32,6 +32,7 @@ namespace MODL3_Sokoban.domain
 				foreach (char c in line)
 				{
 					Location newLoc = null;
+					BaseFloor newBase = null;
 					Character newCharacter = null;
 					Worker newWorker = null;
 					Crate newCrate = null;
@@ -39,31 +40,41 @@ namespace MODL3_Sokoban.domain
 					{
 						case '@':
 							newCharacter = new Character(c);
-							newLoc = new BaseFloor(xIndex, yIndex, '.', newCharacter);
+							newLoc = new BaseFloor(xIndex, yIndex, '.');
+							newBase = (BaseFloor)newLoc;
+							newBase._movable = newCharacter;
 							newCharacter.currentLoc = newLoc;
 							_maze.character = newCharacter;
 							break;
 						case 'o':
-							newLoc = new BaseFloor(xIndex, yIndex, '.');
 							newCrate = new Crate('o');
+							newLoc = new BaseFloor(xIndex, yIndex, '.');
+							newBase = (BaseFloor)newLoc;
+							newBase._movable = newCrate;
 							newCrate.currentLoc = newLoc;
 							_maze.crateList.Add(newCrate);
 							break;
 						case '0':
-							newLoc = new BaseFloor(xIndex, yIndex, 'x');
 							newCrate = new Crate('o');
+							newLoc = new BaseFloor(xIndex, yIndex, 'x');
+							newBase = (BaseFloor)newLoc;
+							newBase._movable = newCrate;
 							newCrate.currentLoc = newLoc;
 							_maze.crateList.Add(newCrate);
 							break;
 						case '$':
-							newLoc = new BaseFloor(xIndex, yIndex, '.');
 							newWorker = new Worker('$');
+							newLoc = new BaseFloor(xIndex, yIndex, '.');
+							newBase = (BaseFloor)newLoc;
+							newBase._movable = newWorker;
 							newWorker.currentLoc = newLoc;
 							_maze.worker = newWorker;
 							break;
 						case 'z':
-							newLoc = new BaseFloor(xIndex, yIndex, '.');
 							newWorker = new Worker('z');
+							newLoc = new BaseFloor(xIndex, yIndex, '.');
+							newBase = (BaseFloor)newLoc;
+							newBase._movable = newWorker;
 							newWorker.currentLoc = newLoc;
 							_maze.worker = newWorker;
 							break;
@@ -90,7 +101,7 @@ namespace MODL3_Sokoban.domain
 				yIndex++;
 			}
 		}
-		public void drawMaze()
+		public void DrawMaze()
 		{
 			Console.Clear();
 			_maze.firstRowLoc = _maze.firstLoc;
@@ -109,7 +120,39 @@ namespace MODL3_Sokoban.domain
 					_maze.secondRowLoc = _maze.firstRowLoc.downLoc;
 				}
 			}
-			Console.ReadLine();
+			TakeTurn();
+		}
+
+		public void TakeTurn()
+		{
+			bool input = false;
+			ConsoleKey key = 0;
+			Direction direction = 0;
+			while (!input)
+			{
+				key = Console.ReadKey().Key;
+				if (key == ConsoleKey.LeftArrow || key == ConsoleKey.RightArrow || key == ConsoleKey.UpArrow || key == ConsoleKey.DownArrow)
+				{
+					switch (key)
+					{
+						case ConsoleKey.LeftArrow:
+							direction = Direction.left;
+							break;
+						case ConsoleKey.RightArrow:
+							direction = Direction.right;
+							break;
+						case ConsoleKey.UpArrow:
+							direction = Direction.up;
+							break;
+						case ConsoleKey.DownArrow:
+							direction = Direction.down;
+							break;
+					}
+					input = true;
+				}
+			}
+			_maze.character.getNextLoc(_maze.character.currentLoc, direction);
+			DrawMaze();
 		}
 	}
 }
