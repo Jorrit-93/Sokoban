@@ -31,7 +31,7 @@ namespace MODL3_Sokoban.domain
 			this.yPosition = y;
 		}
 
-		public char drawLoc()
+		public virtual char drawLoc()
 		{
 			return symbol;
 		}
