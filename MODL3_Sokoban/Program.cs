@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MODL3_Sokoban.domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace MODL3_Sokoban
 	{
 		static void Main(string[] args)
 		{
+			new Controller();
 		}
 	}
 }

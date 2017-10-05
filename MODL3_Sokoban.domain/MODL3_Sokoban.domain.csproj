@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{79F747F9-8C91-4517-92EE-8697CB2056A4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{475427B5-FF9F-4D17-B151-2D06A037CFC1}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MODL3_Sokoban</RootNamespace>
-    <AssemblyName>MODL3_Sokoban</AssemblyName>
+    <RootNamespace>MODL3_Sokoban.domain</RootNamespace>
+    <AssemblyName>MODL3_Sokoban.domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,17 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="BaseFloor.cs" />
+    <Compile Include="Character.cs" />
+    <Compile Include="Destination.cs" />
+    <Compile Include="Movable.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="Crate.cs" />
+    <Compile Include="Direction.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="Maze.cs" />
+    <Compile Include="Presentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MODL3_Sokoban.domain\MODL3_Sokoban.domain.csproj">
-      <Project>{475427b5-ff9f-4d17-b151-2d06a037cfc1}</Project>
-      <Name>MODL3_Sokoban.domain</Name>
-    </ProjectReference>
+    <Compile Include="Trap.cs" />
+    <Compile Include="Worker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
