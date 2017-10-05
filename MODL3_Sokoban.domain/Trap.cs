@@ -29,11 +29,16 @@
                     stepCounter++;
                     if (stepCounter == 3)
                     {
-                        symbol = ' ';
+                        ChangeSymbol();
                         DropCrate();
                     }
                 }
             }                      
+        }
+
+        public void ChangeSymbol()
+        {
+            symbol = ' ';
         }
 	}
 }
