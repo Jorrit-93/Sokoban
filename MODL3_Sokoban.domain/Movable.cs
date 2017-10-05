@@ -9,21 +9,21 @@ namespace MODL3_Sokoban.domain
 	public class Movable
 	{
         public Location currentLoc { get; set; }
-        public Symbol symbol { get; set; }
+        public char symbol { get; set; }
         public bool canMoveObject { get; set; }
 
-		public Movable(Symbol symbol)
+		public Movable(char symbol)
 		{
 			this.symbol = symbol;
 			switch(symbol)
 			{
-				case Symbol.z:
+				case 'z':
 					canMoveObject = true;
 					break;
-				case Symbol.dollar:
+				case '$':
 					canMoveObject = true;
 					break;
-				case Symbol.at:
+				case '@':
 					canMoveObject = true;
 					break;
 				default:
@@ -45,13 +45,13 @@ namespace MODL3_Sokoban.domain
         public bool checkMove(Location l, Direction d)
         {
             Location nextLoc = getNextLoc(d, l);
-            if (nextLoc.symbol.Equals(Symbol.dot) || nextLoc.symbol.Equals(Symbol.x))
+            if (nextLoc.symbol.Equals('.') || nextLoc.symbol.Equals('x'))
             {
                 return true;
             }
-            if (nextLoc.symbol.Equals(Symbol.o) || nextLoc.symbol.Equals(Symbol.zero))
+            if (nextLoc.symbol.Equals('o') || nextLoc.symbol.Equals('0'))
             {
-                if (l.symbol.Equals(Symbol.at))
+                if (l.symbol.Equals('@'))
                 {
                     if (checkMove(getNextLoc(d, l), d))
                     {

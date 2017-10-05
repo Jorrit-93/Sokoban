@@ -8,13 +8,18 @@ namespace MODL3_Sokoban.domain
 {
 	class BaseFloor : Location
 	{
-		private Movable _movable;
+		public Movable _movable { get; set; }
 
-		public BaseFloor(int x, int y, Symbol symbol) : base(x, y, symbol)
+		public BaseFloor(int x, int y, char symbol) : base(x, y, symbol)
 		{
 		}
 
-		public new Symbol drawLoc()
+		public BaseFloor(int x, int y, char symbol, Movable m) : base(x, y, symbol)
+		{
+			this._movable = m;
+		}
+
+		public new char drawLoc()
 		{
 			if (_movable == null)
 			{

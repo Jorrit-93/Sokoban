@@ -9,11 +9,12 @@ namespace MODL3_Sokoban.domain
     public class Worker : Movable
     {
         Random randomLoc = new Random();
-        public Worker()
-        {
 
-        }
-        public new void Move()
+		public Worker(char symbol) : base(symbol)
+		{
+		}
+
+		public new void Move()
         {
             int rnd = randomLoc.Next(1,5);
 
@@ -37,10 +38,10 @@ namespace MODL3_Sokoban.domain
 
         public new void ChangeSymbol()
         {
-            if (this.symbol == Symbol.dollar)
-                this.symbol = Symbol.z;
+            if (this.symbol == '$')
+                this.symbol = 'z';
             else
-                this.symbol = Symbol.dollar;
+                this.symbol = '$';
         }
     }
 }

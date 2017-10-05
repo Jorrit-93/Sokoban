@@ -8,7 +8,7 @@ namespace MODL3_Sokoban.domain
 {
 	public class Character : Movable
 	{
-		public Character(Symbol symbol) : base(symbol)
+		public Character(char symbol) : base(symbol)
 		{
 		}
 

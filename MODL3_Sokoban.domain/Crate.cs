@@ -8,7 +8,7 @@ namespace MODL3_Sokoban.domain
 {
 	public class Crate : Movable
 	{
-		public Crate(Symbol symbol) : base(symbol)
+		public Crate(char symbol) : base(symbol)
 		{
 		}
 
@@ -19,7 +19,7 @@ namespace MODL3_Sokoban.domain
 
         public void ChangeSymbol()
         {
-            this.symbol = Symbol.zero;
+            this.symbol = '0';
         }
 	}
 }

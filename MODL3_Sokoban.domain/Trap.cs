@@ -2,7 +2,7 @@
 {
 	internal class Trap : BaseFloor
 	{
-		public Trap(int x, int y, Symbol symbol) : base(x, y, symbol)
+		public Trap(int x, int y, char symbol) : base(x, y, symbol)
 		{
 		}
 	}

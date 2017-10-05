@@ -8,7 +8,7 @@ namespace MODL3_Sokoban.domain
 {
 	public class Location
 	{
-		public Symbol symbol { get; set; }
+		public char symbol { get; set; }
 
 		public int xPosition { get; set; }
 		public int yPosition { get; set; }
@@ -18,7 +18,7 @@ namespace MODL3_Sokoban.domain
 		public Location upLoc { get; set; }
 		public Location downLoc { get; set; }
 
-		public Location(int x, int y, Symbol symbol)
+		public Location(int x, int y, char symbol)
 		{
             this.symbol = symbol;
 			this.xPosition = x;
@@ -31,7 +31,7 @@ namespace MODL3_Sokoban.domain
 			this.yPosition = y;
 		}
 
-		public Symbol drawLoc()
+		public char drawLoc()
 		{
 			return symbol;
 		}
