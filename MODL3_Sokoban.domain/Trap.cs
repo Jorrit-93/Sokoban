@@ -22,13 +22,18 @@
         
         public void RaiseStepCounter()
         {
-            stepCounter++;
-            if (stepCounter == 3)
+            if (_movable.currentLoc.xPosition == xPosition && _movable.currentLoc.yPosition == yPosition)
             {
-                symbol = ' ';
-                DropCrate();
-            }            
+                if (_movable.symbol == '@')
+                {
+                    stepCounter++;
+                    if (stepCounter == 3)
+                    {
+                        symbol = ' ';
+                        DropCrate();
+                    }
+                }
+            }                      
         }
-
 	}
 }
