@@ -24,10 +24,10 @@
         {
             if (_movable.currentLoc.xPosition == xPosition && _movable.currentLoc.yPosition == yPosition)
             {
-                if (_movable.symbol == '@')
+                if (_movable.symbol == 'o' || _movable.symbol == '@')
                 {
                     stepCounter++;
-                    if (stepCounter == 3)
+                    if (stepCounter >= 3)
                     {
                         ChangeSymbol();
                         DropCrate();
