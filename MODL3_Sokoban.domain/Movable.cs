@@ -41,54 +41,50 @@ namespace MODL3_Sokoban.domain
         {
 
         }
-		public bool getNextLoc(Location l, Direction d)
-		{
-			switch (d)
-			{
-				case Direction.left:
-					l = l.leftLoc;
-					break;
-				case Direction.right:
-					l = l.rightLoc;
-					break;
-				case Direction.up:
-					l = l.upLoc;
-					break;
-				case Direction.down:
-					l = l.downLoc;
-					break;
-			}
-			if(checkMove(l, d))
-			{
-				Move(l);
-			}
-		}
 
-		public bool checkMove(Location l, Direction d)
+		public bool checkMove(Location nextLoc, Direction direction)
         {
-			if (l.drawLoc().Equals('.') || l.drawLoc().Equals('x') || l.drawLoc().Equals('~'))
+			if (nextLoc.drawLoc().Equals('.') || nextLoc.drawLoc().Equals('x') || nextLoc.drawLoc().Equals('~'))
 			{
 				return true;
             }
-			if ((l.drawLoc().Equals('o') || l.drawLoc().Equals('0')) && canMoveObject)
+			if ((nextLoc.drawLoc().Equals('o') || nextLoc.drawLoc().Equals('0')) && canMoveObject)
 			{
-				BaseFloor crateFloor = (BaseFloor)l;
-				crateFloor._movable.getNextLoc(l, d);
-				if(crateFloor._movable.checkMove(l, d))
-				{
-					return true;
-				}
+				BaseFloor crateFloor = (BaseFloor)nextLoc;
+				return crateFloor._movable.Move(direction);
 			}
 			return false;
 		}
-		public virtual void Move(Location l)
+		public Location getNextLoc(Direction direction)
 		{
-			BaseFloor temp;
-			temp = (BaseFloor)l;
-			temp._movable = this;
-			temp = (BaseFloor)currentLoc;
-			temp._movable = null;
-			currentLoc = l;
+			switch (direction)
+			{
+				case Direction.left:
+					return currentLoc.leftLoc;
+				case Direction.right:
+					return currentLoc.rightLoc;
+				case Direction.up:
+					return currentLoc.upLoc;
+				case Direction.down:
+					return currentLoc.downLoc;
+			}
+			return null;
+		}
+
+		public bool Move(Direction direction)
+		{
+			Location nextLoc = getNextLoc(direction);
+			if (checkMove(nextLoc, direction))
+			{
+				BaseFloor temp;
+				temp = (BaseFloor)nextLoc;
+				temp._movable = this;
+				temp = (BaseFloor)currentLoc;
+				temp._movable = null;
+				currentLoc = nextLoc;
+				return true;
+			}
+			return false;
 		}
 	}
 }

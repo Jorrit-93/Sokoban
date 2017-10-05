@@ -153,13 +153,13 @@ namespace MODL3_Sokoban.domain
 					input = true;
 				}
 			}
-			_maze.character.getNextLoc(_maze.character.currentLoc, direction);
+			_maze.character.Move(direction);
 			if(_maze.worker != null)
 			{
-				Direction workerDirection = _maze.worker.WorkerStatusUpdate();
-				if (workerDirection != 0)
+				direction = _maze.worker.WorkerStatusUpdate();
+				if (direction != 0)
 				{
-					_maze.worker.getNextLoc(_maze.worker.currentLoc, workerDirection);
+					_maze.worker.Move(direction);
 				}
 			}
 			DrawMaze();
