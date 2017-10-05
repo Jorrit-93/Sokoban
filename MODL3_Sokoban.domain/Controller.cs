@@ -34,6 +34,7 @@ namespace MODL3_Sokoban.domain
 				}
 				Console.WriteLine("YOU WIN!");
 				Console.WriteLine("press 'enter' to continue");
+				Console.Beep();
 				Console.ReadLine();
 				Console.Clear();
 			}
@@ -168,18 +169,18 @@ namespace MODL3_Sokoban.domain
 							direction = Direction.down;
 							break;
 					}
-
 					input = true;
+				}
+				else
+				{
+					DrawMaze();
 				}
 			}
 			_maze.character.Move(direction);
 			if (_maze.worker != null)
 			{
 				direction = _maze.worker.WorkerStatusUpdate();
-				if (direction != 0)
-				{
-					_maze.worker.Move(direction);
-				}
+				_maze.worker.Move(direction);
 			}
 		}
 	}

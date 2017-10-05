@@ -48,8 +48,8 @@ namespace MODL3_Sokoban.domain
 			{
                 if (nextLoc.drawLoc().Equals('z'))
                 {
-                    BaseFloor workFloor = (BaseFloor)nextLoc;
-                    workFloor._movable.symbol = '$';
+                    BaseFloor workerFloor = (BaseFloor)nextLoc;
+                    workerFloor._movable.symbol = '$';
                     return false;
                 }
 				return true;
@@ -58,6 +58,14 @@ namespace MODL3_Sokoban.domain
 			{
 				BaseFloor crateFloor = (BaseFloor)nextLoc;
 				return crateFloor._movable.Move(direction);
+			}
+			if (symbol.Equals('$') && nextLoc.drawLoc().Equals('@'))
+			{
+				BaseFloor characterFloor = (BaseFloor)nextLoc;
+				if (characterFloor._movable.Move(direction))
+				{
+					return true;
+				}
 			}
 			return false;
 		}

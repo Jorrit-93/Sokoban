@@ -55,7 +55,7 @@ namespace MODL3_Sokoban.domain
 			}
 			if (c == 's')
 			{
-				num = -1;
+				Environment.Exit(0);
 			}
 			return num;
 		}
