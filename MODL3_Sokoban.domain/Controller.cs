@@ -148,6 +148,7 @@ namespace MODL3_Sokoban.domain
 							direction = Direction.down;
 							break;
 					}
+
 					input = true;
 				}
 			}
